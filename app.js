@@ -37,6 +37,40 @@ app.get('/getCodeBlocks',async (req,res)=> {
     res.json(codeBlocks)
 });
 
+app.get('/getFirstSocket', (req, res) => {
+    res.json( firstUserSocket.id );
+});
+
+app.post('/addCodeBlock',async (req,res) => {
+    const { id, title, code } = req.body;
+  
+    
+    const newCodeBlock = new CodeBlock({
+      id,
+      title,
+      code
+    });
+
+
+    const savedCB = await newCodeBlock.save();
+    res.json(savedCB);
+
+})
+
+app.post('/updateCodeBlock',async (req,res) => {
+    const { title, code } = req.body;
+  
+    const existingCodeBlock = await CodeBlock.findOne({ title });
+
+    // Update the code field
+    existingCodeBlock.code = code;
+
+    // Save the updated CodeBlock
+    const updatedCodeBlock = await existingCodeBlock.save();
+    res.json(updatedCodeBlock);
+
+})
+
 
 
 
@@ -74,41 +108,7 @@ io.on('connection', (socket) => {
   });
 });
 
-app.get('/getFirstSocket', (req, res) => {
-    res.json( firstUserSocket.id );
-});
 
-app.post('/addCodeBlock',async (req,res) => {
-    const { id, title, code } = req.body;
-  
-    
-    const newCodeBlock = new CodeBlock({
-      id,
-      title,
-      code
-    });
-
-
-    const savedCB = await newCodeBlock.save();
-    res.json(savedCB);
-
-})
-
-app.post('/updateCodeBlock',async (req,res) => {
-    const { title, code } = req.body;
-  
-    
-    const newCodeBlock = new CodeBlock({
-      id,
-      title,
-      code
-    });
-
-
-    const savedCB = await newCodeBlock.save();
-    res.json(savedCB);
-
-})
 
 
 
