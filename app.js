@@ -26,9 +26,8 @@ app.use(cors());
 let firstUserSocket = null; // To keep track of the first user
 
 app.get('/', (req, res) => {
-    const codeBlockNames = ["Code1", "Code2", "Code3" , "Code4"];
-    console.log(codeBlockNames)
-    res.json(codeBlockNames);
+    
+    res.json("Welcome to my server!");
 }    
 );
 
