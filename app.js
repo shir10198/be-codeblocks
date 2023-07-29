@@ -114,7 +114,7 @@ io.on('connection', (socket) => {
 
 const port = process.env.PORT || 5000;
 const connectionString = process.env.MONGODB_CONNECTION_STRING;
-server.listen(port, () => console.log(`Server running on port ${port}`));
+server.listen(process.env.PORT, () => console.log(`Server running on port ${port}`));
 
 
 
